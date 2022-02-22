@@ -10,7 +10,7 @@ if(isset($_POST['dataset'])){ $dataset = $_POST['dataset']; }else{
     'fullname'=>'Raping Tonprasert',
   );
 }
-if(isset($_POST['token'])){ $token = $_POST['token']; }else{  $token=""; }
+if(isset($_POST['token'])){ $token = $_POST['token']; }else{  $token="authen_encode"; }
 
 
 // $token_payload = [
@@ -22,18 +22,27 @@ if(isset($_POST['token'])){ $token = $_POST['token']; }else{  $token=""; }
 $token_payload = $dataset;
 
 // This is your client secret
-$key = 'tossapol.c@dru.ac.th';
+$key = base64_encode($dataset['email']);
 
-// This is your id token
-$jwt = JWT::encode($token_payload, base64_decode(strtr($key, '-_', '+/')), 'HS256');
 
-print "JWT:\n";
-print_r($jwt);
+switch ($token) {
+  case 'authen_encode':
+    // This is your id token
+    $jwt = JWT::encode($token_payload, base64_decode(strtr($key, '-_', '+/')), 'HS256');
+    // print "JWT:\n";
+    // print_r($jwt);
+    echo $jwt;
+  break;
+  case 'authen_decode':
+    $decoded = JWT::decode($jwt, base64_decode(strtr($key, '-_', '+/')), ['HS256']);
 
-$decoded = JWT::decode($jwt, base64_decode(strtr($key, '-_', '+/')), ['HS256']);
+    // print "\n\n";
+    // print "Decoded:\n";
+    // print_r($decoded);
+    echo $decoded;
+  break;
+}
 
-print "\n\n";
-print "Decoded:\n";
-print_r($decoded);
+
 
 ?>
