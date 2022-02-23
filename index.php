@@ -12,7 +12,8 @@ if(isset($_POST['dataset'])){ $dataset = $_POST['dataset']; }else{
 }
 if(isset($_POST['token'])){ $token = $_POST['token']; }else{  $token="authen_encode"; }
 
-
+var_dump($dataset);
+var_dump($token);
 // $token_payload = [
 //   'iss' => 'https://github.com/auth0/php-jwt-example',
 //   'sub' => '123456',
