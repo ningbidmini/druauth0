@@ -34,7 +34,7 @@ switch ($token) {
     echo $jwt;
   break;
   case 'authen_decode':
-
+    echo $dataset;
     $decoded = JWT::decode($dataset, base64_decode(strtr($key, '-_', '+/')), ['HS256']);
 
     // print "\n\n";
