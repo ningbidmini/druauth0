@@ -12,8 +12,8 @@ if(isset($_POST['dataset'])){ $dataset = $_POST['dataset']; }else{
 }
 if(isset($_POST['token'])){ $token = $_POST['token']; }else{  $token="authen_encode"; }
 
-var_dump($dataset);
-var_dump($token);
+echo $dataset;
+echo $token;
 // $token_payload = [
 //   'iss' => 'https://github.com/auth0/php-jwt-example',
 //   'sub' => '123456',
@@ -35,7 +35,7 @@ switch ($token) {
     echo $jwt;
   break;
   case 'authen_decode':
-    echo $dataset;
+    // echo $dataset;
     $decoded = JWT::decode($dataset, base64_decode(strtr($key, '-_', '+/')), ['HS256']);
 
     // print "\n\n";
